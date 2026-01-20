@@ -1,52 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TikTok Downloader</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Downloader - Download Video TikTok Tanpa Watermark</title>
+   <link rel="stylesheet" href="style.css">
+ 
+   
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <button class="theme-toggle" id="themeToggle">🌙</button>
-  <h1 id="title">TikTok Video Downloader</h1>
-  <video controls id="videoPlayer" style="width: 70%; display: none;"></video>                
-  <nav>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <input type="text" id="tiktokUrl" placeholder="Masukkan URL TikTok">
-  <button id="downloadButton">Download Video</button>
-  <div class="result" id="result"></div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="logo-text">
+                        TikTok<span> Downloader</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
 
-  <section id="about" class="section">
-    <h2>Fitur Utama</h2>
-    <p>
-     Jika Tidak Bisa Di Download Maka Download lewat Titik tiga
-      
-      Unduh Video Tanpa Watermark
-Unduh video TikTok favorit tanpa tanda air.
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Download TikTok Videos</h1>
+                <p class="hero-subtitle">Download video TikTok tanpa watermark dengan kualitas tinggi. Gratis, cepat, dan mudah digunakan.</p>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="action-btn" id="pasteBtn">
+                        <i class="fas fa-paste"></i>
+                        Tempel dari Clipboard
+                    </button>
+                    <button class="action-btn" id="exampleBtn">
+                        <i class="fas fa-eye"></i>
+                        Contoh URL
+                    </button>
+                    <button class="action-btn" id="clearBtn">
+                        <i class="fas fa-trash"></i>
+                        Bersihkan
+                    </button>
+                </div>
 
-Proses Cepat dan Mudah
-Salin tautan, klik unduh, dan video siap disimpan.
+                <!-- Download Form -->
+                <div class="download-card">
+                    <!-- Quality Selector -->
+                    <div class="quality-selector">
+                        <button class="quality-btn active" data-quality="hd">HD Quality</button>
+                        <button class="quality-btn" data-quality="sd">SD Quality</button>
+                        <button class="quality-btn" data-quality="audio">Audio Only</button>
+                    </div>
 
-Kualitas Pilihan
-Pilih kualitas video sesuai keinginan.
+                    <div class="input-wrapper">
+                        <i class="fas fa-link input-icon"></i>
+                        <input 
+                            type="text" 
+                            id="tiktokUrl" 
+                            class="url-input" 
+                            placeholder="Tempel URL video TikTok di sini..."
+                            autocomplete="off"
+                        >
+                        <button class="bookmark-btn" id="bookmarkBtn" title="Simpan ke Bookmark">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                    
+                    <button id="downloadButton" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        Download Sekarang
+                    </button>
+                    
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p>Memproses video...</p>
+                    </div>
+                </div>
 
-Tanpa Aplikasi
-Cukup gunakan website untuk mengunduh video.
-    </p>
-  </section>
+                <!-- Batch Download Section -->
+                <div class="batch-section">
+                    <h3><i class="fas fa-layer-group"></i> Batch Download</h3>
+                    <textarea 
+                        id="batchUrls" 
+                        class="batch-input" 
+                        placeholder="Tempel beberapa URL TikTok (satu per baris)..."
+                    ></textarea>
+                    <div class="batch-actions">
+                        <button class="batch-btn" id="processBatch">
+                            <i class="fas fa-cogs"></i> Proses Semua
+                        </button>
+                        <button class="batch-btn" id="clearBatch">
+                            <i class="fas fa-broom"></i> Bersihkan
+                        </button>
+                        <button class="batch-btn" id="downloadAll">
+                            <i class="fas fa-download"></i> Download Semua
+                        </button>
+                    </div>
+                </div>
 
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>
-      Jika Anda memiliki pertanyaan, saran, atau masalah, silakan hubungi kami di: 
-      <nav>
-    <a href="https://wa.me/6288297877862">whatsapp</a>
-    </nav>
-    </p>
-  </section>
-   <script src="script.js"></script>
+                <!-- History Section -->
+                <div class="history-section">
+                    <div class="history-header">
+                        <h3><i class="fas fa-history"></i> Riwayat Download</h3>
+                        <button class="batch-btn" id="clearHistory">
+                            <i class="fas fa-trash"></i> Hapus Riwayat
+                        </button>
+                    </div>
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be added here -->
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="results" id="result"></div>
+            </div>
+        </div>
+        <!-- FAQ / HELP SECTION -->
+<div class="faq-section">
+    <h3><i class="fas fa-circle-question"></i> Kenapa Video Tidak Bisa Didownload?</h3>
+
+    <div class="faq-item">
+        <h4>❌ Akun TikTok Private</h4>
+        <p>Video dari akun private tidak bisa didownload karena dibatasi oleh TikTok.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>❌ Link Tidak Valid</h4>
+        <p>Pastikan URL berasal dari TikTok (contoh: tiktok.com atau vt.tiktok.com).</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>❌ Video Sudah Dihapus</h4>
+        <p>Jika video sudah dihapus oleh pemiliknya, maka sistem tidak bisa mengambil data.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>❌ Server Sibuk / Error</h4>
+        <p>Terkadang server API sedang penuh. Silakan tunggu beberapa menit lalu coba lagi.</p>
+    </div>
+
+    <div class="faq-item">
+        <h4>❌ Koneksi Internet Lemah</h4>
+        <p>Pastikan koneksi internet stabil saat melakukan proses download.</p>
+    </div>
+</div>
+
+
+    </section>
+<!-- CONTACT SECTION -->
+<div class="contact-section">
+    <h3><i class="fas fa-headset"></i> Hubungi Kami</h3>
+    <p>Jika mengalami masalah atau video tidak bisa didownload, silakan hubungi kami:</p>
+
+    <div class="contact-list">
+        <a href="mailto:support@tiktokdownloader.com">
+            <i class="fas fa-envelope"></i> support@tiktokdownloader.com
+        </a>
+
+        <a href="https://wa.me/6288297877862" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp Admin
+        </a>
+
+        <a href="https://instagram.com/starry.ris" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <script src="script.js"></script>
+    </div>
+</div>
 </body>
 </html>
